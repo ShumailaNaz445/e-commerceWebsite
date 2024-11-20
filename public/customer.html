@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC Website</title>
+    <link rel="stylesheet" href="customer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+   
+
+    
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>ABC</h1>
+            </div>
+            <div class="nav-items">
+                <a href="#">Products</a>
+                <div class="icon-count">
+                    <i class="fa-solid fa-bag-shopping" id="cart-icon"></i>
+                    <span id="cart-count">0</span>
+                </div>
+                <button onclick="logOut()">Log Out</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="cart">
+        <h2 class="cart-title">Your Cart</h2>
+
+        <!-- CONTENT  -->
+        <div class="cart-content">
+
+
+        </div>
+
+        <!-- TOTAL   -->
+        <div class="total">
+            <div class="total-title">Total</div>
+            <div class="total-price">$0</div>
+        </div>
+        <div class="buttons">
+             <!-- BUY BUTTON  -->
+             <button type="button" class="btn-buy">Buy Now</button>
+             <!-- CART CLOSE  -->
+             <button id="cart-close">Close Cart</button>
+
+         </div>
+    </div>
+
+    <!-- <div class="hero">
+        <div class="info">
+            <h1>OUR STORE</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing .<br> elit Magnam aspernatur.</p>
+        </div>
+    </div> -->
+
+    <h2 class="section-title">Shop Products</h2>
+    <div class="cards">
+        <div class="product-cards">
+            <ul id="product-list">
+
+                <div class="list"></div>
+            </ul>
+        </div> 
+    </div>
+
+    <!-- <div class="cartTab">
+        <h1>Shopping Cart</h1>
+        <div class="listCart">
+            <div class="item">
+                <div class="image">
+                    <img src="./Furniture image.avif" alt="">
+                </div>
+                <div class="name">
+                    Name
+                </div>
+                <div class="totaPrice">
+                    $200
+                </div>
+                <div class="quantity">
+                    <span class="minus">&gt;</span>
+                    <span>0</span>
+                    <span class="plus">&lt;</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="btn">
+            <button class="close">Close</button>
+            <button class="checkOut">CHECK Out</button>
+        </div>
+    </div> -->
+    
+    
+
+    
+      <!-- CART -->
+      <div class="cart">
+        <span id="cart-close">&times;</span>
+        <h2>Your Cart</h2>
+        <div class="cart-content">
+
+        </div>
+        <!-- total -->
+        <div class="total">
+          <h3>Total: <span class="total-price">$0.00</span></h3>
+        </div>
+        <button class="btn-buy">Place Order</button>
+      </div>
+    
+
+<script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</body>
+</html>

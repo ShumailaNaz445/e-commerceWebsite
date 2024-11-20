@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <title>Admin-panel</title>
+</head>
+<body>
+
+
+    <header>
+        <div class="sidebar">
+            <div class="logo">
+                <h1>ABC Admin</h1>
+            </div>
+            <p><a href="#addProducts">Add Product</a></p>
+            <p><a href="./customer.html">Customer Interface</a> </p>
+            <p> <a href="./userdata.html">Customers Data</a> </p>
+        </div>
+        <nav>
+            
+            <div class="nav-items">
+                <div class="panels">
+                    <p><i class="fa-solid fa-bars"></i></p>
+                    <p class="admin">Admin-Panel</p>
+                    <p>Home</p>
+                </div>
+                <div class="cards">
+                <div class="product-cards">
+                    <ul id="product-detail">
+
+                    </ul>
+                </div>    
+
+
+    
+
+                </div>
+                    
+
+            </div>
+
+
+
+
+            <div id="addProducts">
+                <h1>POST DATA TO DATABASE</h1>
+                <input type="file" id="productImage" >
+                <input type="text" id="name" placeholder="Enter product name">
+                <input type="text" id="description" placeholder="Enter product description">
+                <input type="text" id="category" placeholder="Enter product category">
+                <input type="text" id="price" placeholder="Enter product price">
+                <button onclick="dataToBackend()">Push</button>
+            
+            </div>
+        </nav>
+    </header>
+
+
+<script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    
+</body>
+</html>

@@ -1,0 +1,163 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+header{
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header nav{
+    width: 80%;
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    
+}
+header .sidebar{
+    width: 20%;
+    position: fixed;
+    left: 0%;
+    top: 0%;
+    bottom: 0%;
+    /* border: 2px solid black; */
+    /* display: flex; */
+    justify-content: center;
+    /* align-items: center; */
+    background: rgb(43, 42, 42);
+}
+header nav .nav-items{
+    width: 100%;
+    height: 100%;
+}
+header nav .nav-items .panels{
+    /* border: 2px solid black; */
+    width: 100%;
+    height: 30px;
+    padding-left: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 2px 2px 12px 2px grey;
+
+}
+header nav .nav-items .admin{
+    color: goldenrod;
+}
+header .sidebar .logo h1{
+    color: goldenrod;
+    font-size: 2.5rem;
+}
+header .sidebar a{
+    text-decoration: none;
+    color: white;
+}
+header .sidebar p{
+    padding-top: 10px;
+    font-size: 1.3rem;
+}
+header nav .cards{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 40px;
+}
+header nav .cards .product-cards{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+header nav .cards #product-detail{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* flex-wrap: wrap; */
+}
+header nav .cards .product-cards #product-detail img{
+    width: 100%;
+    height: 200px;
+
+}
+header nav .cards .product-cards #product-detail li{
+    list-style: none;
+    border: 1px solid grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 200px;
+    /* height: 500px; */
+    /* gap: 10px; */
+    /* flex-wrap: wrap; */
+    padding: 10px;
+}
+header nav #addProducts{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 50px;
+    /* width: 50%; */
+    /* border: 1px solid black; */
+}
+header nav #addProducts{
+    color: goldenrod;
+}
+header nav #addProducts input{
+    padding: 10px;
+    width: 50%;
+    margin-top: 20px;
+}
+header nav #addProducts button{
+    border: none;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 1.2rem;
+    background: black;
+    color: goldenrod;
+    width: 150px;
+}
+
+
+
+
+@media (max-width:900px){
+    header nav{
+        width: 70%;
+    }
+    header .sidebar{
+        width: 30%;
+    }
+
+    header .sidebar .logo h1{
+        /* color: goldenrod; */
+        font-size: 2rem;
+    } 
+    header .sidebar p{
+        padding-top: 10px;
+        font-size: 1rem;
+    }
+}
+@media (max-width:700px){
+    header nav #addProducts input{
+        width: 100%;
+    }
+    header .sidebar .logo h1{
+        /* color: goldenrod; */
+        font-size: 1.5rem;
+    }
+
+}

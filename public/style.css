@@ -46,7 +46,6 @@
     outline: none;
     background: none;
     color: rgb(209, 207, 207);
-    /* background-image: linear-gradient(rgba(2, 1, 1, 0.281),rgba(2, 1, 1, 0.075)); */
 }
 .container .parent .child p{
     padding-top: 10px;

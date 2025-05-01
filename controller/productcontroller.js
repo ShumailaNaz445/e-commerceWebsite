@@ -1,32 +1,19 @@
-const multer = require('multer');
+
 const cloudinary = require('cloudinary').v2;
 const productModel = require('../model/product');
 const fs = require('fs'); 
+const upload = require('../middleware/multer')
 
-// Configure Multer storage
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads');
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-        cb(null, uniqueSuffix + '-' + file.originalname);
-    },
-});
 
-const upload = multer({ storage: storage });
-
-// Configure Cloudinary
 cloudinary.config({
     cloud_name: 'dqqkk3iy7',
     api_key: '893228789639723',
-    api_secret: 'AbfO-WVwWOfIjEdAUyxGwJdyYtY',
+    api_secret: 'AbfO-WVwWOfIjEdAUyxGwJdyYtY'
 });
+// console.log( process.env.cloud_name , process.env.api_key , process.env.api_secret);
 
 const addProduct = async (req, res) => {
     try {
-        console.log('Connected to addProduct');
-
         const { productName, price, description, category } = req.body;
         const productImage = req.file;
 
@@ -59,11 +46,8 @@ const addProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
-    try {
-        // const productId = req.params.id; 
+    try { 
         const {productName , description , price , category} = req.body;
-
-        
         const updatedProduct = await productModel.findByIdAndUpdate(
             { _id: req.params.id } , 
             {productName , description , price , category},
@@ -89,15 +73,27 @@ const updateProduct = async (req, res) => {
 
 const getProduct = async (req, res) => {
     try {
-        const data = await productModel.find();
-        if (!data) return res.send("Invalid product");
-        res.send({
-            status: 200,
-            message: "Products are found",
-            data: data
-        })
+        const {search , category}= req.query;
+        const filters = {};
+        if(search){
+            filters.productName = {$regex:search , $options:"i"}
+        }
+        if(category){
+            filters.category =  { $regex: category, $options: "i" };
+        }
+
+
+        const data = await productModel.find(filters);
+        if (!data || !data.length === 0) return res.status(404).send("Invalid product");
+        else{
+            res.send({
+                status: 200,
+                message: "Product is found",
+                data: data
+            })
+        }
     } catch (error) {
-        res.send({
+        res.status(500).send({
             message: "Error",
             error: error.message
         })
@@ -107,7 +103,6 @@ const getProduct = async (req, res) => {
 }
 
 const deleteProduct = async (req, res) => {
-
     try {
         const data = await productModel.findByIdAndDelete({ _id: req.params.id });
         console.log(req.params.id);
@@ -119,7 +114,7 @@ const deleteProduct = async (req, res) => {
         })
 
     } catch (error) {
-        res.send({
+        res.status(500).send({
             message: "Error",
             error: error.message
         })

@@ -10,7 +10,7 @@
 <body>
    
 
-    
+     <!-- Headers     -->
     <header>
         <nav>
             <div class="logo">
@@ -18,20 +18,27 @@
             </div>
             <div class="nav-items">
                 <a href="#">Products</a>
-                <div class="icon-count">
-                    <i class="fa-solid fa-bag-shopping" id="cart-icon"></i>
-                    <span id="cart-count">0</span>
+                <div class="icon-count" id="icon-count">
+                    <i class="fa-solid fa-bag-shopping"   onclick="openCart()"></i>
+                    <span id="cart-count" onclick="cartCount()">0</span>
                 </div>
+                <div id="search-filter">
+                    <input type="text" id="search-bar" placeholder="Search products..."/>
+                    <i class="fa-solid fa-magnifying-glass" id="filter-button" onclick="searchFilter()"></i>
+                  </div>
+                  
                 <button onclick="logOut()">Log Out</button>
             </div>
         </nav>
     </header>
 
-    <div class="cart">
+
+    <!-- Cart -->
+    <div class="cart" id="cart-section" >
         <h2 class="cart-title">Your Cart</h2>
 
         <!-- CONTENT  -->
-        <div class="cart-content">
+        <div class="cart-content" id="cart-content">
 
 
         </div>
@@ -39,49 +46,52 @@
         <!-- TOTAL   -->
         <div class="total">
             <div class="total-title">Total</div>
-            <div class="total-price">$0</div>
+            <div class="total-price" id="total-amount" onclick="updateTotalPrice()">$0.00</div>
         </div>
         <div class="buttons">
              <!-- BUY BUTTON  -->
-             <button type="button" class="btn-buy">Buy Now</button>
+             <button type="button" class="btn-buy" id="buyNow" onclick="customerInfo()">Buy Now</button>
              <!-- CART CLOSE  -->
-             <button id="cart-close">Close Cart</button>
+             <button id="cart-close" onclick="closeCart()">Close Cart</button>
 
          </div>
     </div>
 
 
-    <h2 class="section-title">Shop Products</h2>
-    <div class="cards">
-        <div class="product-cards">
-            <ul id="product-list">
+    <!-- product Section -->
+    <div class="body">
 
-                <div class="list"></div>
-            </ul>
-        </div> 
+        <h2 class="section-title">Shop Products</h2>
+        <div class="cards">
+            <div class="product-cards">
+                <ul id="product-list">
+                    
+                    
+                </ul>
+            </div> 
+        </div>
+        
     </div>
 
-    
 
-    
-      <!-- CART -->
-      <div class="cart">
-        <span id="cart-close">&times;</span>
-        <h2>Your Cart</h2>
-        <div class="cart-content">
-
-        </div>
-        <!-- total -->
-        <div class="total">
-          <h3>Total: <span class="total-price">$0.00</span></h3>
-        </div>
-        <button class="btn-buy">Place Order</button>
+    <!-- buy now form -->
+      <div class="form" id="form">
+            <label>Email:</label>
+            <input type="email" id="email" placeholder="Enter your email">
+            <label>Phone no:</label>
+            <input type="text" id="number" placeholder="Enter your mobile number">
+            <label>Delivery Address:</label>
+            <textarea id="address" name="address" required></textarea>
+            <button type="submit" onclick="placeOrder()" >Place Order</button>
+          
       </div>
-    
 
-<script src="app.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+      
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script src="app.js"></script>
 
 </body>
 </html>

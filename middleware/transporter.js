@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const sendResetPassword = async (fname , email , token) => {
+const sendResetPassword = async (name , email , token) => {
     try {
         const transporter = nodemailer.createTransport({
             host:"smtp.gmail.com",
@@ -16,14 +16,13 @@ const sendResetPassword = async (fname , email , token) => {
             from:"",
             to:email,
             subject:"For Reset Password",
-            html:`<p> h1 ${fname} , please copy this link <a href = "http://localhost:3000/reset-password?token=${token}"> resetPassword </a> </p>`
+            html:`<p> h1 ${name} , please copy this link <a href = "http://localhost:3000/reset-password?token=${token}"> resetPassword </a> </p>`
         }
         transporter.sendMail(mailOption , (error , info) =>{
             if(error){
                 console.log(error);
-            } else{
-                console.log("mail has sent" , info.response);
-                
+            }else{
+                console.log("mail has sent");    
             }
         })
     } catch (error) {

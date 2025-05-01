@@ -11,19 +11,20 @@
 
 
     <header>
-        <div class="sidebar">
+        <div class="sidebar" id="side-bar">
             <div class="logo">
-                <h1>ABC Admin</h1>
+                <h1>ABC</h1>
             </div>
             <p><a href="#addProducts">Add Product</a></p>
             <p><a href="./customer.html">Customer Interface</a> </p>
             <p> <a href="./userdata.html">Customers Data</a> </p>
+            <button class="close" id="close" onclick="closeSidebar()">Close</button>
         </div>
-        <nav>
-            
+
+        <nav>    
             <div class="nav-items">
                 <div class="panels">
-                    <p><i class="fa-solid fa-bars"></i></p>
+                    <p onclick="openSidebar()"><i class="fa-solid fa-bars"></i></p>
                     <p class="admin">Admin-Panel</p>
                     <p>Home</p>
                 </div>
@@ -59,9 +60,9 @@
     </header>
 
 
-<script src="app.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
 
     
 </body>

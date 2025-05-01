@@ -3,6 +3,7 @@ const route = require ('express').Router();
 const productController = require ('../controller/productcontroller');
 
 
+
 route.post("/addproduct" , productController.upload.single('productImage'),productController.addProduct);
 
 route.put(`/updateproduct/:id` , productController.updateProduct);

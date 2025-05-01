@@ -8,51 +8,21 @@ const randomString = require('randomstring');
 
 
 
-
-// cloudinary.config({ 
-//     cloud_name: process.env.CLOUD_NAME, 
-//     api_key: process.env.API_KEY, 
-//     api_secret: process.env.API_SECRET // Click 'View API Keys' above to copy your API secret
-// });
-
-// console.log(process.env.CLOUD_NAME , process.env.API_KEY , process.env.API_SECRET);
-
-
-
-
-
-
-
-
 const mydata = async (req, res) => {
     try {
-        // console.log("connected")
         const { name, email, password } = req.body;
-        // const profileImage = req.file;
-        // console.log("profileImage" , profileImage);
+
         if (!email) return res.send("Invalid email");
 
-        // if (password != confirmPassword) return res.send('Chech your password again');
-        // console.log(req.body);
-        // const rejex = /^(?!^\d)(?=.*[a-z])(?=.*[A-Z]).{6}$/;
-        // if (rejex.test(password)) return res.send('invalid password');
-        // if (rejex.test(email)) return res.send('invalid email');
         else {
             const salt = bcrypt.genSaltSync(saltRounds);
             const hash = bcrypt.hashSync(password, salt);
-            // const upload1 = await cloudinary.uploader.upload(profileImage.path)
             const data = SignupModel({
                 name: name,
                 email: email,
                 password: hash,
-                // profileImage: upload1.secure_url
             })
             data.save();
- 
-            // const upload1 = await cloudinary.uploader.upload(profileImage.path);
-            // console.log("cloudinary" , upload1);
-            
-            // const uploadResult = await cloudinary.uploader
            
             res.send({
                 status: 200,
@@ -63,7 +33,7 @@ const mydata = async (req, res) => {
 
 
     } catch (error) {
-        res.send({
+        res.status(500).send({
             message: "error",
             error: error.message
         })
@@ -83,7 +53,7 @@ const updatedata = async (req, res) => {
             data: data
         })
     } catch (error) {
-        res.send({
+        res.status(500).send({
             message: "Invalid User id",
             error: error
         })
@@ -102,7 +72,7 @@ const getdata = async (req, res) => {
             data: data
         })
     } catch (error) {
-        res.send({
+        res.status(500).send({
             message: "Error",
             error: error
         })
@@ -111,17 +81,17 @@ const getdata = async (req, res) => {
 
 }
 
-const deletedata = async(req,resp) =>{
+const deletedata = async(req,res) =>{
     try {
         const data = await SignupModel.findByIdAndDelete({_id:req.params.id})
-        if(!data) return resp.send({message:"data not found"})
-            resp.send({
+        if(!data) return res.send({message:"data not found"})
+            res.send({
               status:200,
               message:"data delete!",
               
             })
     } catch (error) {
-        resp.send({
+        res.status(500).send({
             message:"error",
             err:error
         })
@@ -152,11 +122,10 @@ const logindata = async (req, res) => {
                     isAdmin: userData.isAdmin
 
                 })
-
             })
         }
     } catch (error) {
-        res.send({
+        res.status(500).send({
             message: "Error",
             error: error.message
         })
@@ -165,19 +134,15 @@ const logindata = async (req, res) => {
 
 const createAdmin = async (req, res) => {
     try {
-        const adminEmail = "shum.naz246003@gmail.com"; // Hardcoded admin email
-        const adminPassword = "admin1234567"; // Hardcoded admin password
-
-        // Check if admin already exists
+        const adminEmail = process.env.ADMIN_EMAIL; 
+        const adminPassword = process.env.ADMIN_PASSWORD; 
+        
         const existingAdmin = await SignupModel.findOne({ email: adminEmail });
         if (existingAdmin) {
             return res.status(400).json({ message: "Admin already exists" });
         }
-
-        // Hash the password
         const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
-        // Create admin user
         const admin = new SignupModel({
             name: "Admin",
             email: adminEmail,
@@ -188,11 +153,14 @@ const createAdmin = async (req, res) => {
         await admin.save();
         res.status(201).json({ message: "Admin created successfully" });
     } catch (error) {
-        res.status(500).json({ message: "Error creating admin", error: error.message });
+        res.status(500).send({
+            message: "Error",
+            error: error.message
+        })
     }
 };
 
-// Update Admin
+
 const updateAdmin = async (req, res) => {
     try {
         const { email } = req.body;
@@ -201,7 +169,6 @@ const updateAdmin = async (req, res) => {
             return res.status(400).json({ message: "Email is required" });
         }
 
-        // Update isAdmin to true for the specified user
         const updatedUser = await SignupModel.findOneAndUpdate(
             { email },
             { isAdmin: true },
@@ -214,7 +181,10 @@ const updateAdmin = async (req, res) => {
 
         res.status(200).json({ message: "User promoted to admin successfully", data: updatedUser });
     } catch (error) {
-        res.status(500).json({ message: "Error updating admin", error: error.message });
+        res.status(500).send({
+            message: "Error",
+            error: error.message
+        })
     }
 };
 
@@ -241,7 +211,7 @@ const forgetpassowrd = async (req, res) => {
         })
 
     } catch (error) {
-        res.send({
+        res.status(500).send({
             message: "Error",
             error: error.message
         })
@@ -258,7 +228,7 @@ const resetpassword = async (req, res) => {
             const password = req.body.password;
             const salt = bcrypt.genSaltSync(saltRounds)
             const hashPassword = bcrypt.hashSync(password, salt);
-            const user = await signupModel.findByIdAndUpdate(
+            const user = await SignupModel.findByIdAndUpdate(
                 { _id: token._id },
                 { $set: { password: hashPassword, randomToken: "" } },
                 { new: true }
@@ -273,7 +243,7 @@ const resetpassword = async (req, res) => {
         })
 
     } catch (error) {
-        res.send({
+        res.status(500).send({
             message: "Email is not avalable",
             error: error
         })
@@ -282,4 +252,14 @@ const resetpassword = async (req, res) => {
 
 
 
-module.exports = { mydata, updatedata, getdata, deletedata, logindata, forgetpassowrd, resetpassword , createAdmin , updateAdmin}
+module.exports = { 
+    mydata , 
+    updatedata , 
+    getdata , 
+    deletedata , 
+    logindata , 
+    forgetpassowrd , 
+    resetpassword , 
+    createAdmin , 
+    updateAdmin
+}

@@ -1,15 +1,11 @@
 
-const cloudinary = require('cloudinary').v2;
 const productModel = require('../model/product');
 const fs = require('fs'); 
-const upload = require('../middleware/multer')
+const upload = require('../middleware/multer');
+const cloudinary = require ('../config/cloudinary')
 
 
-cloudinary.config({
-    cloud_name: 'dqqkk3iy7',
-    api_key: '893228789639723',
-    api_secret: 'AbfO-WVwWOfIjEdAUyxGwJdyYtY'
-});
+
 // console.log( process.env.cloud_name , process.env.api_key , process.env.api_secret);
 
 const addProduct = async (req, res) => {
